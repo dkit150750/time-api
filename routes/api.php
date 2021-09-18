@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\ChangeTimeController;
+use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/cabinets/pagen', [CabinetController::class, 'pagen']);
     Route::resource('cabinets', CabinetController::class)->except(['show']);
+    Route::get('/teachers/pagen', [TeacherController::class, 'pagen']);
+    Route::resource('teachers', TeacherController::class)->except(['show']);
 });
