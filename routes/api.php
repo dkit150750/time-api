@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CabinetController;
 use App\Http\Controllers\ChangeTimeController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::put('/times', [TimeController::class, 'update']);
     Route::put('/change-times', [ChangeTimeController::class, 'update']);
+
+    Route::get('/cabinets/pagen', [CabinetController::class, 'pagen']);
+    Route::resource('cabinets', CabinetController::class)->except(['show']);
 });
