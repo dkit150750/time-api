@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ChangeTimeController;
+use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,13 @@ use Illuminate\Support\Facades\Route;
 //Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/times', [TimeController::class, 'show']);
+Route::get('/change-times', [ChangeTimeController::class, 'show']);
+
 // Protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::put('/times', [TimeController::class, 'update']);
+    Route::put('/change-times', [ChangeTimeController::class, 'update']);
 });
