@@ -8,13 +8,13 @@ use App\Models\ChangeTime;
 
 class ChangeTimeController extends Controller
 {
-    public function show()
+    public function show(): TimeResource
     {
         $time = ChangeTime::first();
         return new TimeResource($time);
     }
 
-    public function update(TimeRequest $request)
+    public function update(TimeRequest $request): void
     {
         ChangeTime::first()->update($request->all());
     }
