@@ -24,7 +24,7 @@ class CabinetRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:cabinets'],
+            'name' => ['required', 'string'],
         ];
     }
 
@@ -32,7 +32,6 @@ class CabinetRequest extends FormRequest
     {
         return [
             'name.required' => 'Введите название кабинета',
-            'name.unique' => 'Такой кабинет уже есть',
         ];
     }
 }
