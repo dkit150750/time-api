@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GroupRequest extends FormRequest
+class GroupUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,17 +24,15 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'unique:groups'],
-            'course' => ['required'],
+            'name' => ['string', 'unique:groups'],
+            'course' => [],
         ];
     }
 
     public function messages()
     {
         return [
-            'name.required' => 'Введите название',
             'name.unique' => 'Такая группа уже есть',
-            'course.required' => 'Укажите курс',
         ];
     }
 }

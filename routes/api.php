@@ -34,9 +34,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/groups', [GroupController::class, 'index']);
     Route::post('/groups', [GroupController::class, 'store']);
+    Route::put('/groups/{group}', [GroupController::class, 'update']);
+    Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
 
     Route::put('/times', [TimeController::class, 'update']);
-    Route::put('/change-times', [ChangeTimeController::class, 'update']);
+    Route::put('/change-times', [ChangeTimeController::class, 'destroy']);
 
     Route::get('/cabinets/pagen', [CabinetController::class, 'pagen']);
     Route::resource('cabinets', CabinetController::class)->except(['show']);

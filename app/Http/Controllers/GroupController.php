@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GroupRequest;
+use App\Http\Requests\GroupUpdateRequest;
 use App\Http\Resources\GroupResource;
 use App\Models\Change;
 use App\Models\Day;
@@ -53,5 +54,17 @@ class GroupController extends Controller
             }
         }
         return new GroupResource($group);
+    }
+
+    public function update(GroupUpdateRequest $request, $slug)
+    {
+        $group = Group::where('slug', $slug)->first();
+        $group->update($request->all());
+    }
+
+    public function destroy($slug)
+    {
+        $group = Group::where('slug', $slug)->first();
+        $group->delete();
     }
 }
