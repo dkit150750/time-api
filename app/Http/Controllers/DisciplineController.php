@@ -10,31 +10,27 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class DisciplineController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
-        if ($request->filled('search')) {
-            $cabinet = Discipline::select('id', 'name')->where('name', 'like', "{$request->search}%")->orderBy('name');
-        } else {
-            $cabinet = Discipline::select('id', 'name')->orderBy('name');
-        }
-        return DisciplineResource::collection($cabinet);
+        $discipline = Discipline::select('id', 'name')->orderBy('name')->get();
+        return DisciplineResource::collection($discipline);
     }
 
     public function pagen(Request $request): AnonymousResourceCollection
     {
         if ($request->filled('search')) {
-            $cabinet = Discipline::select('id', 'name')->where('name', 'like', "{$request->search}%")->orderBy('name')->paginate(10);
+            $discipline = Discipline::select('id', 'name')->where('name', 'like', "{$request->search}%")->orderBy('name')->paginate(10);
         } else {
-            $cabinet = Discipline::select('id', 'name')->orderBy('name')->paginate(10);
+            $discipline = Discipline::select('id', 'name')->orderBy('name')->paginate(10);
         }
-        return DisciplineResource::collection($cabinet);
+        return DisciplineResource::collection($discipline);
     }
 
 
     public function store(DisciplineRequest $request): DisciplineResource
     {
-        $cabinet = Discipline::create($request->all());
-        return new DisciplineResource($cabinet);
+        $discipline = Discipline::create($request->all());
+        return new DisciplineResource($discipline);
     }
 
     public function update(DisciplineRequest $request, Discipline $discipline)

@@ -10,4 +10,14 @@ class Cabinet extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function lessons()
+    {
+        return $this->belongsToMany(Lesson::class);
+    }
+
+    public function changes()
+    {
+        return $this->belongsToMany(Change::class);
+    }
 }

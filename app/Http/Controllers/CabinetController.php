@@ -10,14 +10,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CabinetController extends Controller
 {
-
     public function index(Request $request): AnonymousResourceCollection
     {
-        if ($request->filled('search')) {
-            $cabinet = Cabinet::select('id', 'name')->where('name', 'like', "{$request->search}%")->orderBy('name');
-        } else {
-            $cabinet = Cabinet::select('id', 'name')->orderBy('name');
-        }
+        $cabinet = Cabinet::select('id', 'name')->orderBy('name')->get();
         return CabinetResource::collection($cabinet);
     }
 
