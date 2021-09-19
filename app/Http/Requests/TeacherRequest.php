@@ -24,7 +24,7 @@ class TeacherRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'unique:teachers'],
         ];
     }
 
@@ -32,6 +32,7 @@ class TeacherRequest extends FormRequest
     {
         return [
             'name.required' => 'Введите имя преподавателя',
+            'name.unique' => 'Такой преподаватель уже есть',
         ];
     }
 }

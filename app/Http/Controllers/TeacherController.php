@@ -30,7 +30,7 @@ class TeacherController extends Controller
         return TeacherResource::collection($cabinet);
     }
 
-    public function store(Request $request): TeacherResource
+    public function store(TeacherRequest $request): TeacherResource
     {
         $cabinet = Teacher::create($request->all());
         return new TeacherResource($cabinet);

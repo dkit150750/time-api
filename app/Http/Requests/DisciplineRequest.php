@@ -24,7 +24,7 @@ class DisciplineRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string'],
+            'name' => ['required', 'string', 'unique:disciplines'],
         ];
     }
 
@@ -32,6 +32,7 @@ class DisciplineRequest extends FormRequest
     {
         return [
             'name.required' => 'Введите название дисциплины',
+            'name.unique' => 'Такая дисциплина уже есть',
         ];
     }
 }

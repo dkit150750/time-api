@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DisciplineRequest;
 use App\Http\Resources\DisciplineResource;
 use App\Models\Discipline;
 use Illuminate\Http\Request;
@@ -30,13 +31,13 @@ class DisciplineController extends Controller
     }
 
 
-    public function store(Request $request): DisciplineResource
+    public function store(DisciplineRequest $request): DisciplineResource
     {
         $cabinet = Discipline::create($request->all());
         return new DisciplineResource($cabinet);
     }
 
-    public function update(Request $request, Discipline $discipline)
+    public function update(DisciplineRequest $request, Discipline $discipline)
     {
         if ($discipline->id > 2) {
             $discipline->update($request->all());
