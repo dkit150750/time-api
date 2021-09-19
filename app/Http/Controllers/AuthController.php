@@ -32,4 +32,15 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out']);
     }
+
+    public function password(Request $request): JsonResponse
+    {
+        $user = User::where('login', $request->login)->first();
+        if (!$user || !Hash::check($request->current_password, $user->password)) {
+            return response()->json(['current_password' => 'Неверный текущий пароль'], 400);
+        }
+        $user->password = Hash::make($request->password);
+        $user->save();
+        return response()->json(['message' => 'success']);
+    }
 }
