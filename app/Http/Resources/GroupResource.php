@@ -20,7 +20,7 @@ class GroupResource extends JsonResource
             'course' => $this->course,
             'slug' => $this->slug,
             'days' => DayResource::collection($this->whenLoaded('days')),
-            'change' => new ChangeResource($this->whenLoaded('change')),
+            'changes' => ChangeResource::collection($this->whenLoaded('changes')),
         ];
     }
 }

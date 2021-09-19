@@ -27,8 +27,8 @@ class Group extends Model
         return $this->hasMany(Day::class);
     }
 
-    public function change()
+    public function changes()
     {
-        return $this->hasOne(Change::class);
+        return $this->hasMany(Change::class);
     }
 }
