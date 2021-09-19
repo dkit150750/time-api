@@ -64,7 +64,7 @@ class GroupController extends Controller
             } elseif ($dayIndex === 2) {
                 $dayName = 'Вторник';
             } elseif ($dayIndex === 3) {
-                $dayName = 'Стреда';
+                $dayName = 'Среда';
             } elseif ($dayIndex === 4) {
                 $dayName = 'Четверг';
             } elseif ($dayIndex === 5) {
