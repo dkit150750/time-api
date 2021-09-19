@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         ];
         DB::table('users')->insert($users);
 
+        DB::table('dates')->insert(['name' => 'пусто']);
+
         DB::table('disciplines')->insert(['name' => 'пусто']);
 		DB::table('disciplines')->insert(['name' => 'нет']);
 		DB::table('cabinets')->insert(['name' => 'пусто']);

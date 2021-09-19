@@ -2,84 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\DateResource;
 use App\Models\Date;
 use Illuminate\Http\Request;
 
 class DateController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    public function show(): DateResource
     {
-        //
+        $day = Date::first();
+        return new DateResource($day);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function update(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Date  $date
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Date $date)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Date  $date
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Date $date)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Date  $date
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Date $date)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Date  $date
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Date $date)
-    {
-        //
+        $date = Date::first();
+        $date->update($request->all());
     }
 }
