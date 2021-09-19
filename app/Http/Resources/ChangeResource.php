@@ -17,22 +17,22 @@ class ChangeResource extends JsonResource
         return [
             'id' => $this->id,
             // дисциплины
-            'disciplineEven' => $this->disciplineEven,
-            'disciplineOdd' => $this->disciplineOdd,
+            'disciplineEven' => $this->whenLoaded('disciplineEven'),
+            'disciplineOdd' => $this->whenLoaded('disciplineOdd'),
 
             // нечетные кабинты
-            'firstOddCabinet' => $this->firstOddCabinet,
-            'secondOddCabinet' => $this->secondOddCabinet,
+            'firstOddCabinet' => $this->whenLoaded('firstOddCabinet'),
+            'secondOddCabinet' => $this->whenLoaded('secondOddCabinet'),
             // четные кабинты
-            'firstEvenCabinet' => $this->firstEvenCabinet,
-            'secondEvenCabinet' => $this->secondEvenCabinet,
+            'firstEvenCabinet' => $this->whenLoaded('firstEvenCabinet'),
+            'secondEvenCabinet' => $this->whenLoaded('secondEvenCabinet'),
 
             // нечетные кабинты
-            'firstEvenTeacher' => $this->firstEvenTeacher,
-            'secondEvenTeacher' => $this->secondEvenTeacher,
+            'firstEvenTeacher' => $this->whenLoaded('firstEvenTeacher'),
+            'secondEvenTeacher' => $this->whenLoaded('secondEvenTeacher'),
             // четные кабинты
-            'firstOddTeacher' => $this->firstOddTeacher,
-            'secondOddTeacher' => $this->secondOddTeacher,
+            'firstOddTeacher' => $this->whenLoaded('firstOddTeacher'),
+            'secondOddTeacher' => $this->whenLoaded('secondOddTeacher'),
         ];
     }
 }

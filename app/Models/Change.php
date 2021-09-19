@@ -9,7 +9,21 @@ class Change extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['group_id'];
+    protected $fillable = [
+        'group_id',
+        'disciplineOdd_id',
+        'disciplineEven_id',
+
+        'firstOddCabinet_id',
+        'secondOddCabinet_id',
+        'firstEvenCabinet_id',
+        'secondEvenCabinet_id',
+
+        'firstOddTeacher_id',
+        'secondOddTeacher_id',
+        'firstEvenTeacher_id',
+        'secondEvenTeacher_id',
+    ];
 
     // дисциплины
     public function disciplineEven()
