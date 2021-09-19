@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CabinetController;
+use App\Http\Controllers\ChangeController;
 use App\Http\Controllers\ChangeTimeController;
+use App\Http\Controllers\DateController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +30,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/times', [TimeController::class, 'show']);
 Route::get('/change-times', [ChangeTimeController::class, 'show']);
 Route::get('/groups/{group}', [GroupController::class, 'show']);
+Route::get('/courses/{group}/groups', [GroupController::class, 'courseGroups']);
+Route::get('/dates', [DateController::class, 'show']);
 
 // Protected routes
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -34,11 +39,17 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::get('/groups', [GroupController::class, 'index']);
     Route::post('/groups', [GroupController::class, 'store']);
+    Route::put('/groups/fresh-changes', [GroupController::class, 'fresh']);
     Route::put('/groups/{group}', [GroupController::class, 'update']);
     Route::delete('/groups/{group}', [GroupController::class, 'destroy']);
 
+    Route::put('/lessons/{id}', [LessonController::class, 'update']);
+    Route::put('/changes/{id}', [ChangeController::class, 'update']);
+
+    Route::put('/dates', [DateController::class, 'update']);
+
     Route::put('/times', [TimeController::class, 'update']);
-    Route::put('/change-times', [ChangeTimeController::class, 'destroy']);
+    Route::put('/change-times', [ChangeTimeController::class, 'update']);
 
     Route::get('/cabinets/pagen', [CabinetController::class, 'pagen']);
     Route::resource('cabinets', CabinetController::class)->except(['show']);
