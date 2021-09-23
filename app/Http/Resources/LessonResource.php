@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Cabinet;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class LessonResource extends JsonResource
@@ -18,8 +17,8 @@ class LessonResource extends JsonResource
         return [
             'id' => $this->id,
             // дисциплины
-            'disciplineEven' => $this->whenLoaded('disciplineEven'),
-            'disciplineOdd' => $this->whenLoaded('disciplineOdd'),
+            'oddDiscipline' => $this->whenLoaded('oddDiscipline'),
+            'evenDiscipline' => $this->whenLoaded('evenDiscipline'),
 
             // нечетные кабинты
             'firstOddCabinet' => $this->whenLoaded('firstOddCabinet'),
@@ -29,11 +28,11 @@ class LessonResource extends JsonResource
             'secondEvenCabinet' => $this->whenLoaded('secondEvenCabinet'),
 
             // нечетные кабинты
-            'firstEvenTeacher' => $this->whenLoaded('firstEvenTeacher'),
-            'secondEvenTeacher' => $this->whenLoaded('secondEvenTeacher'),
-            // четные кабинты
             'firstOddTeacher' => $this->whenLoaded('firstOddTeacher'),
             'secondOddTeacher' => $this->whenLoaded('secondOddTeacher'),
+            // четные кабинты
+            'firstEvenTeacher' => $this->whenLoaded('firstEvenTeacher'),
+            'secondEvenTeacher' => $this->whenLoaded('secondEvenTeacher'),
         ];
     }
 }
