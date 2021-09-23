@@ -10,13 +10,14 @@ class DateController extends Controller
 {
     public function show(): DateResource
     {
-        $day = Date::first();
-        return new DateResource($day);
+        $date = Date::select('id', 'name')->first();
+        return new DateResource($date);
     }
 
-    public function update(Request $request)
+    public function update(Request $request): DateResource
     {
         $date = Date::first();
         $date->update($request->all());
+        return new DateResource($date);
     }
 }
