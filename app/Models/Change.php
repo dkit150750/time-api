@@ -11,8 +11,9 @@ class Change extends Model
 
     protected $fillable = [
         'group_id',
-        'disciplineOdd_id',
-        'disciplineEven_id',
+
+        'oddDiscipline_id',
+        'evenDiscipline_id',
 
         'firstOddCabinet_id',
         'secondOddCabinet_id',
@@ -25,51 +26,45 @@ class Change extends Model
         'secondEvenTeacher_id',
     ];
 
-    // дисциплины
-    public function disciplineEven()
+    public function group()
     {
-        return $this->belongsTo(Discipline::class, 'disciplineEven_id');
+        return $this->belongsTo(Group::class);
     }
 
-    public function disciplineOdd()
+    // дисциплины
+    public function oddDiscipline()
     {
-        return $this->belongsTo(Discipline::class, 'disciplineOdd_id');
+        return $this->belongsTo(Discipline::class, 'oddDiscipline_id');
+    }
+
+    public function evenDiscipline()
+    {
+        return $this->belongsTo(Discipline::class, 'evenDiscipline_id');
     }
 
     // нечетные кабинеты
     public function firstOddCabinet()
     {
-        return $this->belongsTo(Teacher::class, 'firstOddCabinet_id');
+        return $this->belongsTo(Cabinet::class, 'firstOddCabinet_id');
     }
 
     public function secondOddCabinet()
     {
-        return $this->belongsTo(Teacher::class, 'secondOddCabinet_id');
+        return $this->belongsTo(Cabinet::class, 'secondOddCabinet_id');
     }
 
     // четные кабинеты
     public function firstEvenCabinet()
     {
-        return $this->belongsTo(Teacher::class, 'firstEvenCabinet_id');
+        return $this->belongsTo(Cabinet::class, 'firstEvenCabinet_id');
     }
 
     public function secondEvenCabinet()
     {
-        return $this->belongsTo(Teacher::class, 'secondEvenCabinet_id');
+        return $this->belongsTo(Cabinet::class, 'secondEvenCabinet_id');
     }
 
     // нечетные преподаватели
-    public function firstEvenTeacher()
-    {
-        return $this->belongsTo(Teacher::class, 'firstEvenTeacher_id');
-    }
-
-    public function secondEvenTeacher()
-    {
-        return $this->belongsTo(Teacher::class, 'secondEvenTeacher_id');
-    }
-
-    // четные преподаватели
     public function firstOddTeacher()
     {
         return $this->belongsTo(Teacher::class, 'firstOddTeacher_id');
@@ -80,8 +75,14 @@ class Change extends Model
         return $this->belongsTo(Teacher::class, 'secondOddTeacher_id');
     }
 
-    public function group()
+    // четные преподаватели
+    public function firstEvenTeacher()
     {
-        return $this->belongsTo(Group::class);
+        return $this->belongsTo(Teacher::class, 'firstEvenTeacher_id');
+    }
+
+    public function secondEvenTeacher()
+    {
+        return $this->belongsTo(Teacher::class, 'secondEvenTeacher_id');
     }
 }
