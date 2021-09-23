@@ -17,10 +17,10 @@ class CreateChangesTable extends Migration
             $table->id();
             $table->foreignId('group_id')->constrained()->onDelete('cascade');
             // дисциплины
-            $table->unsignedBigInteger('disciplineEven_id')->default(1);
-            $table->foreign('disciplineEven_id')->references('id')->on('disciplines');
-            $table->unsignedBigInteger('disciplineOdd_id')->default(1);
-            $table->foreign('disciplineOdd_id')->references('id')->on('disciplines');
+            $table->unsignedBigInteger('oddDiscipline_id')->default(1);
+            $table->foreign('oddDiscipline_id')->references('id')->on('disciplines');
+            $table->unsignedBigInteger('evenDiscipline_id')->default(1);
+            $table->foreign('evenDiscipline_id')->references('id')->on('disciplines');
 
             // нечетные кабинеты
             $table->unsignedBigInteger('firstOddCabinet_id')->default(1);
@@ -34,15 +34,15 @@ class CreateChangesTable extends Migration
             $table->foreign('secondEvenCabinet_id')->references('id')->on('cabinets');
 
             // нечетные преподаватели
-            $table->unsignedBigInteger('firstEvenTeacher_id')->default(1);
-            $table->foreign('firstEvenTeacher_id')->references('id')->on('teachers');
-            $table->unsignedBigInteger('secondEvenTeacher_id')->default(1);
-            $table->foreign('secondEvenTeacher_id')->references('id')->on('teachers');
-            // четные преподаватели
             $table->unsignedBigInteger('firstOddTeacher_id')->default(1);
             $table->foreign('firstOddTeacher_id')->references('id')->on('teachers');
             $table->unsignedBigInteger('secondOddTeacher_id')->default(1);
             $table->foreign('secondOddTeacher_id')->references('id')->on('teachers');
+            // четные преподаватели
+            $table->unsignedBigInteger('firstEvenTeacher_id')->default(1);
+            $table->foreign('firstEvenTeacher_id')->references('id')->on('teachers');
+            $table->unsignedBigInteger('secondEvenTeacher_id')->default(1);
+            $table->foreign('secondEvenTeacher_id')->references('id')->on('teachers');
 
             $table->timestamps();
         });
