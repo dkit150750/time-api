@@ -17,22 +17,22 @@ class ChangeResource extends JsonResource
         return [
             'id' => $this->id,
             // дисциплины
-            'oddDiscipline' => $this->whenLoaded('oddDiscipline'),
-            'evenDiscipline' => $this->whenLoaded('evenDiscipline'),
+            'oddDiscipline' => new DisciplineResource($this->whenLoaded('oddDiscipline')),
+            'evenDiscipline' => new DisciplineResource($this->whenLoaded('evenDiscipline')),
 
             // нечетные кабинты
-            'firstOddCabinet' => $this->whenLoaded('firstOddCabinet'),
-            'secondOddCabinet' => $this->whenLoaded('secondOddCabinet'),
+            'firstOddCabinet' => new CabinetResource($this->whenLoaded('firstOddCabinet')),
+            'secondOddCabinet' => new CabinetResource($this->whenLoaded('secondOddCabinet')),
             // четные кабинты
-            'firstEvenCabinet' => $this->whenLoaded('firstEvenCabinet'),
-            'secondEvenCabinet' => $this->whenLoaded('secondEvenCabinet'),
+            'firstEvenCabinet' => new CabinetResource($this->whenLoaded('firstEvenCabinet')),
+            'secondEvenCabinet' => new CabinetResource($this->whenLoaded('secondEvenCabinet')),
 
             // нечетные кабинты
-            'firstOddTeacher' => $this->whenLoaded('firstOddTeacher'),
-            'secondOddTeacher' => $this->whenLoaded('secondOddTeacher'),
+            'firstOddTeacher' => new TeacherResource($this->whenLoaded('firstOddTeacher')),
+            'secondOddTeacher' => new TeacherResource($this->whenLoaded('secondOddTeacher')),
             // четные кабинты
-            'firstEvenTeacher' => $this->whenLoaded('firstEvenTeacher'),
-            'secondEvenTeacher' => $this->whenLoaded('secondEvenTeacher'),
+            'firstEvenTeacher' => new TeacherResource($this->whenLoaded('firstEvenTeacher')),
+            'secondEvenTeacher' => new TeacherResource($this->whenLoaded('secondEvenTeacher')),
         ];
     }
 }
