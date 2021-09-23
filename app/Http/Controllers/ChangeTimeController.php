@@ -10,12 +10,14 @@ class ChangeTimeController extends Controller
 {
     public function show(): TimeResource
     {
-        $time = ChangeTime::first();
+        $time = ChangeTime::select('first', 'second', 'third', 'fourth', 'fifth')->first();
         return new TimeResource($time);
     }
 
-    public function update(TimeRequest $request): void
+    public function update(TimeRequest $request): TimeResource
     {
-        ChangeTime::first()->update($request->all());
+        $time = ChangeTime::first();
+        $time->update($request->all());
+        return new TimeResource($time);
     }
 }
