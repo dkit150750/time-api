@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DisciplineRequest;
 use App\Http\Resources\DisciplineResource;
+use App\Models\Change;
 use App\Models\Discipline;
+use App\Models\Lesson;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
@@ -35,15 +37,33 @@ class DisciplineController extends Controller
 
     public function update(DisciplineRequest $request, Discipline $discipline)
     {
-        if ($discipline->id > 2) {
-            $discipline->update($request->all());
+        if ($discipline->id <= 2) {
+            return response()->json(['message' => 'Нельзя изменить', 'id' => $discipline->id], 405)->header('Allow', 'GET');
         }
+
+        $discipline->update($request->all());
+        return new DisciplineResource($discipline);
     }
 
     public function destroy(Discipline $discipline)
     {
-        if ($discipline->id > 1) {
-            $discipline->delete();
+        $id = $discipline->id;
+        if (
+            Lesson::where('oddDiscipline_id', $id)->orWhere([
+                'evenDiscipline_id' => $id,
+            ])->first()
+            || Change::where('oddDiscipline_id', $id)->orWhere([
+                'evenDiscipline_id' => $id,
+            ])->first()
+        ) {
+            return response()->json(['message' => 'Используется', 'id' => $id], 405)->header('Allow', 'GET');
         }
+
+        if ($id <= 2) {
+            return response()->json(['message' => 'Нельзя удалить', 'id' => $id], 405)->header('Allow', 'GET');
+        }
+
+        $discipline->delete();
+        return response()->json(['id' => $discipline->id]);
     }
 }
