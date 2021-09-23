@@ -11,13 +11,47 @@ class Cabinet extends Model
 
     protected $fillable = ['name'];
 
-    public function lessons()
+    // нечетные уроки
+    public function firstOddLesson()
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->hasMany(Lesson::class, 'firstOddCabinet_id');
     }
 
-    public function changes()
+    public function secondOddLesson()
     {
-        return $this->belongsToMany(Change::class);
+        return $this->hasMany(Lesson::class, 'secondOddCabinet_id');
+    }
+
+    // четные уроки
+    public function firstEvenLesson()
+    {
+        return $this->hasMany(Lesson::class, 'firstEvenCabinet_id');
+    }
+
+    public function secondEvenLesson()
+    {
+        return $this->hasMany(Lesson::class, 'secondEvenCabinet_id');
+    }
+
+    // нечетные изменения
+    public function firstOddChange()
+    {
+        return $this->hasMany(Change::class, 'firstOddCabinet_id');
+    }
+
+    public function secondOddChange()
+    {
+        return $this->hasMany(Change::class, 'secondOddCabinet_id');
+    }
+
+    // четные изменения
+    public function firstEvenChange()
+    {
+        return $this->hasMany(Change::class, 'firstEvenCabinet_id');
+    }
+
+    public function secondEvenChange()
+    {
+        return $this->hasMany(Change::class, 'secondEvenCabinet_id');
     }
 }

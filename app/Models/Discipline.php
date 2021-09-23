@@ -11,13 +11,25 @@ class Discipline extends Model
 
     protected $fillable = ['name'];
 
-    public function lessons()
+    // уроки
+    public function oddLesson()
     {
-        return $this->belongsToMany(Lesson::class);
+        return $this->hasMany(Lesson::class, 'oddDiscipline_id');
     }
 
-    public function changes()
+    public function evenLesson()
     {
-        return $this->belongsToMany(Change::class);
+        return $this->hasMany(Lesson::class, 'evenDiscipline_id');
+    }
+
+    // изменения
+    public function oddChange()
+    {
+        return $this->hasMany(Change::class, 'oddDiscipline_id');
+    }
+
+    public function evenChange()
+    {
+        return $this->hasMany(Change::class, 'evenDiscipline_id');
     }
 }
