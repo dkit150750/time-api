@@ -21,25 +21,24 @@ class DatabaseSeeder extends Seeder
         ];
         DB::table('users')->insert($users);
 
-        DB::table('dates')->insert(['name' => 'пусто']);
+        DB::table('dates')->insert(['name' => '3 сентября']);
 
         DB::table('disciplines')->insert(['name' => 'пусто']);
 		DB::table('disciplines')->insert(['name' => 'нет']);
 		DB::table('cabinets')->insert(['name' => 'пусто']);
+		DB::table('cabinets')->insert(['name' => 'нет']);
 		DB::table('teachers')->insert(['name' => 'пусто']);
-		DB::table('times')->insert([
-			'first' => '10-10',
-			'second' => '10-10',
-			'third' => '10-10',
-			'fourth' => '10-10',
-			'fifth' => '10-10',
-		]);
-		DB::table('change_times')->insert([
-			'first' => '10-10',
-			'second' => '10-10',
-			'third' => '10-10',
-			'fourth' => '10-10',
-			'fifth' => '10-10',
-		]);
+		DB::table('teachers')->insert(['name' => 'нет']);
+
+        $time = [
+			'first' => '10:10-10:10',
+			'second' => '10:10-10:10',
+			'third' => '10:10-10:10',
+			'fourth' => '10:10-10:10',
+			'fifth' => '10:10-10:10',
+		];
+
+		DB::table('times')->insert($time);
+		DB::table('change_times')->insert($time);
     }
 }
