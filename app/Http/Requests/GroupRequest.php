@@ -25,7 +25,7 @@ class GroupRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'unique:groups'],
-            'course' => ['required'],
+            'course' => ['required', 'numeric'],
         ];
     }
 
