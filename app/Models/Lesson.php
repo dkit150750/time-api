@@ -12,18 +12,18 @@ class Lesson extends Model
     protected $fillable = [
         'day_id',
 
-    	'oddDiscipline_id',
-	    'evenDiscipline_id',
+        'oddDiscipline_id',
+        'evenDiscipline_id',
 
-	    'firstOddCabinet_id',
-	    'secondOddCabinet_id',
-	    'firstEvenCabinet_id',
-	    'secondEvenCabinet_id',
+        'firstOddCabinet_id',
+        'secondOddCabinet_id',
+        'firstEvenCabinet_id',
+        'secondEvenCabinet_id',
 
-	    'firstOddTeacher_id',
-	    'secondOddTeacher_id',
-	    'firstEvenTeacher_id',
-	    'secondEvenTeacher_id',
+        'firstOddTeacher_id',
+        'secondOddTeacher_id',
+        'firstEvenTeacher_id',
+        'secondEvenTeacher_id',
     ];
 
     public function day()
