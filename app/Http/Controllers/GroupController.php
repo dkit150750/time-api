@@ -45,7 +45,7 @@ class GroupController extends Controller
                 'changes.firstEvenTeacher:id,name',
                 'changes.secondEvenTeacher:id,name',
             ])
-            ->first();
+            ->firstOrFail();
         return new GroupResource($group);
     }
 
@@ -85,21 +85,50 @@ class GroupController extends Controller
 
     public function update(GroupUpdateRequest $request, $slug): GroupResource
     {
-        $group = Group::where('slug', $slug)->first();
+        $group = Group::where('slug', $slug)->firstOrFail();
         $group->update($request->all());
         return new GroupResource($group);
     }
 
     public function destroy($slug): JsonResponse
     {
-        $group = Group::where('slug', $slug)->first();
+        $group = Group::where('slug', $slug)->firstOrFail();
         $group->delete();
         return response()->json(['id' => $group->id]);
     }
 
+    public function courseGroupsFirst($course): GroupResource
+    {
+        $group = Group::select(['id', 'name', 'course', 'slug'])
+            ->where('course', $course)->with([
+                'days.lessons.oddDiscipline:id,name',
+                'days.lessons.evenDiscipline:id,name',
+                'days.lessons.firstOddCabinet:id,name',
+                'days.lessons.secondOddCabinet:id,name',
+                'days.lessons.firstEvenCabinet:id,name',
+                'days.lessons.secondEvenCabinet:id,name',
+                'days.lessons.firstOddTeacher:id,name',
+                'days.lessons.secondOddTeacher:id,name',
+                'days.lessons.firstEvenTeacher:id,name',
+                'days.lessons.secondEvenTeacher:id,name',
+                'changes.oddDiscipline:id,name',
+                'changes.evenDiscipline:id,name',
+                'changes.firstOddCabinet:id,name',
+                'changes.secondOddCabinet:id,name',
+                'changes.firstEvenCabinet:id,name',
+                'changes.secondEvenCabinet:id,name',
+                'changes.firstOddTeacher:id,name',
+                'changes.secondOddTeacher:id,name',
+                'changes.firstEvenTeacher:id,name',
+                'changes.secondEvenTeacher:id,name',
+            ])
+            ->firstOrFail();
+        return new GroupResource($group);
+    }
+
     public function courseGroups($course): AnonymousResourceCollection
     {
-        return GroupResource::collection(Group::where('course', $course)->get());
+        return GroupResource::collection(Group::select(['id', 'name', 'course', 'slug'])->where('course', $course)->get());
     }
 
     public function fresh(Request $request): JsonResponse
@@ -108,7 +137,7 @@ class GroupController extends Controller
         foreach ($groups as $group) {
             $changes = $group->changes;
 
-            $day = $group->days()->where('name', $request->day)->first();
+            $day = $group->days()->where('name', $request->day)->firstOrFail();
             $lessons = $day->lessons;
 
             for ($i = 0; $i < 5; ++$i) {

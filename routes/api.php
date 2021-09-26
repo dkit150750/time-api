@@ -30,6 +30,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/times', [TimeController::class, 'show']);
 Route::get('/change-times', [ChangeTimeController::class, 'show']);
 Route::get('/groups/{group}', [GroupController::class, 'show']);
+Route::get('/courses/{group}/groups/first', [GroupController::class, 'courseGroupsFirst']);
 Route::get('/courses/{group}/groups', [GroupController::class, 'courseGroups']);
 Route::get('/dates', [DateController::class, 'show']);
 
