@@ -19,8 +19,8 @@ class GroupResource extends JsonResource
             'name' => $this->name,
             'course' => $this->course,
             'slug' => $this->slug,
-            'days' => DayResource::collection($this->whenLoaded('days')),
-            'changes' => ChangeResource::collection($this->whenLoaded('changes')),
+//            'days' => DayResource::collection($this->whenLoaded('days')),
+//            'changes' => ChangeResource::collection($this->whenLoaded('changes')),
         ];
     }
 }

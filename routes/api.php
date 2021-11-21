@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 
 // Public routes
 //Route::post('/register', [AuthController::class, 'register']);
+Route::post('/has-login', [AuthController::class, 'hasLogin']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/times', [TimeController::class, 'show']);

@@ -52,34 +52,34 @@ class GroupController extends Controller
     public function store(GroupRequest $request): GroupResource
     {
         $group = Group::create($request->all());
-        Change::create(['group_id' => $group->id]);
-        Change::create(['group_id' => $group->id]);
-        Change::create(['group_id' => $group->id]);
-        Change::create(['group_id' => $group->id]);
-        Change::create(['group_id' => $group->id]);
-
-        for ($dayIndex = 1; $dayIndex <= 6; $dayIndex++) {
-            $dayName = '';
-            if ($dayIndex === 1) {
-                $dayName = 'Понедельник';
-            } elseif ($dayIndex === 2) {
-                $dayName = 'Вторник';
-            } elseif ($dayIndex === 3) {
-                $dayName = 'Среда';
-            } elseif ($dayIndex === 4) {
-                $dayName = 'Четверг';
-            } elseif ($dayIndex === 5) {
-                $dayName = 'Пятница';
-            } elseif ($dayIndex === 6) {
-                $dayName = 'Суббота';
-            }
-
-            $day = Day::create(['name' => $dayName, 'group_id' => $group->id]);
-
-            for ($lessonIndex = 1; $lessonIndex <= 5; $lessonIndex++) {
-                Lesson::create(['day_id' => $day->id]);
-            }
-        }
+//        Change::create(['group_id' => $group->id]);
+//        Change::create(['group_id' => $group->id]);
+//        Change::create(['group_id' => $group->id]);
+//        Change::create(['group_id' => $group->id]);
+//        Change::create(['group_id' => $group->id]);
+//
+//        for ($dayIndex = 1; $dayIndex <= 6; $dayIndex++) {
+//            $dayName = '';
+//            if ($dayIndex === 1) {
+//                $dayName = 'Понедельник';
+//            } elseif ($dayIndex === 2) {
+//                $dayName = 'Вторник';
+//            } elseif ($dayIndex === 3) {
+//                $dayName = 'Среда';
+//            } elseif ($dayIndex === 4) {
+//                $dayName = 'Четверг';
+//            } elseif ($dayIndex === 5) {
+//                $dayName = 'Пятница';
+//            } elseif ($dayIndex === 6) {
+//                $dayName = 'Суббота';
+//            }
+//
+//            $day = Day::create(['name' => $dayName, 'group_id' => $group->id]);
+//
+//            for ($lessonIndex = 1; $lessonIndex <= 5; $lessonIndex++) {
+//                Lesson::create(['day_id' => $day->id]);
+//            }
+//        }
         return new GroupResource($group);
     }
 
@@ -90,11 +90,15 @@ class GroupController extends Controller
         return new GroupResource($group);
     }
 
-    public function destroy($slug): JsonResponse
+    public function destroy($id): JsonResponse
     {
-        $group = Group::where('slug', $slug)->firstOrFail();
+        $group = Group::find($id);
+        if (!$group) {
+            return response()->json(['success' => false, 'message' => 'Группа не найдена']);
+        }
+
         $group->delete();
-        return response()->json(['id' => $group->id]);
+        return response()->json(['success' => true, 'id' => $group->id]);
     }
 
     public function courseGroupsFirst($course): GroupResource
@@ -128,7 +132,8 @@ class GroupController extends Controller
 
     public function courseGroups($course): AnonymousResourceCollection
     {
-        return GroupResource::collection(Group::select(['id', 'name', 'course', 'slug'])->where('course', $course)->get());
+        return GroupResource::collection(Group::select(['id', 'name', 'course', 'slug'])->where('course',
+            $course)->get());
     }
 
     public function fresh(Request $request): JsonResponse

@@ -12,19 +12,29 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    public function hasLogin(Request $request): JsonResponse
+    {
+        $user = User::where('login', $request->login)->first();
+        if ($user) {
+            return response()->json(['success' => true, 'hasLogin' => true]);
+        }
+        return response()->json(['success' => false, 'hasLogin' => false]);
+    }
+
     public function login(LoginRequest $request): JsonResponse
     {
         $user = User::where('login', $request->login)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
-                'login' => ['Предоставленные учетные данные неверны'],
+                'data' => 'Предоставленные учетные данные неверны',
             ]);
         }
 
         $token = $user->createToken($request->device_name)->plainTextToken;
+        $user->token = $token;
         $userResource = new UserResource($user);
-        return response()->json(['user' => $userResource, 'token' => $token]);
+        return response()->json(['user' => $userResource]);
     }
 
     public function logout(Request $request): JsonResponse
